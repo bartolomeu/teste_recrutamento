@@ -21,10 +21,11 @@ async function makeConversion(req, res) {
   if (!ratesResponse || !ratesResponse.rates)
     return res.send(500, "Operation Unavailable");
 
-  if (!(currencyTarget.toUpper() in ratesResponse.rates))
+  if (!(currencyTarget.toUpperCase() in ratesResponse.rates))
     return res.send(400, "currencyTarget not valid");
 
-  const rateTransaction = ratesResponse[currencyTarget.toUpper()];
+  const rateTransaction = ratesResponse.rates[currencyTarget.toUpperCase()];
+
   const amountTarget = (
     parseFloat(amount) *
     rateTransaction *
