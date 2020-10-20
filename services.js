@@ -4,6 +4,4 @@ function getCurrencyConversionRate(currency) {
   );
 }
 
-module.exports = {
-  getCurrencyConversionRate,
-};
+export default { getCurrencyConversionRate };

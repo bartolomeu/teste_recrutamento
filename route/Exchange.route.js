@@ -1,8 +1,9 @@
-const express = require("express");
-const router = express.Router();
+import express from "express";
 
-const exchangeController = require("../controller/Exchange.controller");
+import exchangeController from "../controller/Exchange.controller.js";
+
+const router = express.Router();
 
 router.post("/", exchangeController.makeConversion);
 
-module.exports = router;
+export default router;

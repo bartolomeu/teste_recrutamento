@@ -1,5 +1,6 @@
-const Datastore = require("nedb"),
-  db = new Datastore({ filename: "db/exchange" });
+import Datastore from "nedb";
+
+const exchange = new Datastore({ filename: "db/exchange" });
 
 // ID do usuário;
 // Moeda origem;
@@ -7,3 +8,5 @@ const Datastore = require("nedb"),
 // Moeda destino;
 // Taxa de conversão utilizada;
 // Data/Hora UTC;
+
+export default exchange;

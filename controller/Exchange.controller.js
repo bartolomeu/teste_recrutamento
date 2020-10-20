@@ -1,6 +1,7 @@
-import { getCurrencyConversionRate } from "../services";
+import Services from "../services.js";
+import ExchangeModel from "../model/Exchange.model.js";
 
-exports.makeConversion = async function (req, res) {
+async function makeConversion(req, res) {
   const { clienID, currencyOrigin, amount, currencyTarget } = req.body;
 
   // This value is on the fee charged to carry out the transaction
@@ -8,7 +9,7 @@ exports.makeConversion = async function (req, res) {
   // for development the fee is setted to 0
   const exchangeFee = 0;
 
-  const ratesRequest = await getCurrencyConversionRate(currencyOrigin);
+  const ratesRequest = await Services.getCurrencyConversionRate(currencyOrigin);
 
   if (!ratesRequest.ok) {
     // confere body used e retorna erro do servidor
@@ -30,7 +31,7 @@ exports.makeConversion = async function (req, res) {
     (1 - exchangeFee)
   ).toFixed(2);
 
-  const transactionData = {
+  const exchangeData = {
     clienID,
     currencyOrigin,
     amountOrigin: amount,
@@ -40,4 +41,14 @@ exports.makeConversion = async function (req, res) {
     exchangeFee,
     timestamp: new Date(),
   };
-};
+  try {
+    ExchangeModel.insert(exchangeData);
+  } catch (error) {
+    return res.send(500, "Database Unavailable");
+  }
+
+  console.log(exchangeData);
+  res.send(exchangeData);
+}
+
+export default { makeConversion };

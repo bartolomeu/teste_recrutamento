@@ -8,6 +8,7 @@
     "start": "npm start",
     "dev": "nodemon index.js"
   },
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://bartolomeugusella@bitbucket.org/recrutamento_jya_nodejs/recrutamento-conversor-nodejs-ccbarto_gmail.com.git"
