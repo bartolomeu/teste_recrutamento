@@ -48,8 +48,20 @@ async function makeConversion(req, res) {
     return res.send(500, "Database Unavailable");
   }
 
-  console.log(exchangeData);
   res.send(exchangeData);
 }
 
-export default { makeConversion };
+function findByUser(req, res) {
+  console.log("entrou");
+  ExchangeModel.find({ clienID: req.params.id }, function (err, transactions) {
+    console.log("voltou do db");
+
+    if (err) return res.send(500, "DataBase Error");
+    console.log("nao deu erro");
+
+    return res.send(transactions);
+  });
+  console.log("entrou1");
+}
+
+export default { makeConversion, findByUser };
