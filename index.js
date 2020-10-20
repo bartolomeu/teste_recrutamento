@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.send("Server is ON, really!");
 });
 
-app.use("/api/excange", exchange);
+app.use("/api/exchange", exchange);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
