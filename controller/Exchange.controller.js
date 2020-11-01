@@ -52,16 +52,23 @@ async function makeConversion(req, res) {
 }
 
 function findByUser(req, res) {
-  console.log("entrou");
-  ExchangeModel.find({ clienID: req.params.id }, function (err, transactions) {
-    console.log("voltou do db");
+  console.log("entrou- ", req.params.id);
+  try {
+    ExchangeModel.find({ clienID: req.params.id }, function (
+      err,
+      transactions
+    ) {
+      console.log("voltou do db");
 
-    if (err) return res.send(500, "DataBase Error");
-    console.log("nao deu erro");
+      if (err) return res.send(500, "DataBase Error");
+      console.log("nao deu erro");
 
-    return res.send(transactions);
-  });
-  console.log("entrou1");
+      return res.send(transactions);
+    });
+  } catch (error) {
+    console.log(error);
+    console.log("entrou erro");
+  }
 }
 
 export default { makeConversion, findByUser };
